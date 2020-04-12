@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+    <title>
+        Author Details
+    </title>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ author.last_name }}, {{ author.first_name }}</h1>
+
+    <p>{{ author.date_of_birth }} - {{ author.date_of_death }}</p>
+
+    <div style="margin-left:20px;margin-top:20px">
+        <h4>Books</h4>
+
+        {% if author.book_set.all %}
+            <ul>
+                {% for copy in author.book_set.all %}
+                    <li>
+                        <h6>{{ copy.title }}</h6>
+                        <p>{{ copy.summary }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>The author has not written any book yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
